@@ -15,6 +15,13 @@ import useAuthUser from "./hooks/useAuthUser.js";
 import Layout from "./components/Layout.jsx";
 import { useThemeStore } from "./store/useThemeStore.js";
 
+
+import FriendsPage from "./pages/FriendsPage";
+
+// inside your routes:
+
+
+
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
   const { theme } = useThemeStore();
@@ -45,6 +52,18 @@ const App = () => {
             !isAuthenticated ? <SignUpPage /> : <Navigate to={isOnboarded ? "/" : "/onboarding"} />
           }
         />
+         <Route
+    path="/friends"
+    element={
+      isAuthenticated && isOnboarded ? (
+        <Layout showSidebar={true}>
+          <FriendsPage />
+        </Layout>
+      ) : (
+        <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+      )
+    }
+  />
         <Route
           path="/login"
           element={

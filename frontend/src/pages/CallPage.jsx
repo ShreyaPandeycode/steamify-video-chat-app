@@ -20,6 +20,27 @@ import toast from "react-hot-toast";
 import PageLoader from "../components/PageLoader";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
+// import React from "react";
+// import useAddFriend from "../hooks/useAddFriend";
+
+// function FriendCard({ friendId, name }) {
+//   const { mutate: addFriend, isPending } = useAddFriend();
+
+//   return (
+//     <div className="flex items-center justify-between p-3 border-b">
+//       <span>{name}</span>
+//       <button
+//         onClick={() => addFriend(friendId)}
+//         disabled={isPending}
+//         className="bg-blue-600 text-white px-3 py-1 rounded-md"
+//       >
+//         {isPending ? "Adding..." : "Add Friend"}
+//       </button>
+//     </div>
+//   );
+// }
+
+
 
 const CallPage = () => {
   const { id: callId } = useParams();
