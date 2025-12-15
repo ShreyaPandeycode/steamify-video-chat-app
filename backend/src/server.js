@@ -19,8 +19,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://steamify-video-chat-app-1.onrender.com",
-      "https://steamify-video-chat-app-sgqo.vercel.app"
+      "https://vercel.com/shreya-pandeys-projects-a01cb388/steamify-video-chat-app-y3ca/BP2HZHEVvHt6tZDPdGytWoy12m9k"
     ],
     credentials: true,
   })
