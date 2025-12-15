@@ -55,6 +55,7 @@ export async function signup(req, res) {
       httpOnly: true, // prevent XSS attacks,
       sameSite: "strict", // prevent CSRF attacks
       secure: process.env.NODE_ENV === "production",
+      
     });
 
     res.status(201).json({ success: true, user: newUser });

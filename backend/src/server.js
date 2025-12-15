@@ -20,6 +20,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://steamify-video-chat-app-1.onrender.com",
+      "https://steamify-video-chat-app-sgqo.vercel.app"
     ],
     credentials: true,
   })
