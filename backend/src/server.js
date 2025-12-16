@@ -18,7 +18,7 @@ const __dirname = path.resolve();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://steamify-video-chat-app-ueb4.vercel.app",
+  "https://streamify-video-chat2.netlify.app",
 ];
 
 app.use(
