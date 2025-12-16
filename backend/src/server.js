@@ -18,28 +18,33 @@ const __dirname = path.resolve();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://streamify-video-chat2.netlify.app",
-  "https://streamify-video-chat3.netlify.app",
-  "https://streamify-video-chat.netlify.app"
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (Postman, server-to-server)
+      // Allow server-to-server / Postman
       if (!origin) return callback(null, true);
 
+      // Allow localhost
       if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
+        return callback(null, true);
       }
+
+      // ✅ ALLOW ANY NETLIFY FRONTEND
+      if (origin.endsWith(".netlify.app")) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("CORS not allowed: " + origin));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// VERY IMPORTANT for preflight
+// IMPORTANT: preflight must use SAME config
 app.options("*", cors());
 
 app.use(express.json());
