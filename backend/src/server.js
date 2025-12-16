@@ -15,15 +15,30 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const __dirname = path.resolve();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://steamify-video-chat-app-ueb4.vercel.app",
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://vercel.com/shreya-pandeys-projects-a01cb388/steamify-video-chat-app-y3ca/BP2HZHEVvHt6tZDPdGytWoy12m9k"
-    ],
+    origin: function (origin, callback) {
+      // allow requests with no origin (Postman, server-to-server)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     credentials: true,
   })
 );
+
+// VERY IMPORTANT for preflight
+app.options("*", cors());
 
 app.use(express.json());
 app.use(cookieParser());
