@@ -51,10 +51,11 @@ export async function signup(req, res) {
     });
 
     res.cookie("jwt", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true, // prevent XSS attacks,
-      sameSite: "strict", // prevent CSRF attacks
-      secure: true,
+      httpOnly: true,
+  secure: true,        // REQUIRED for HTTPS
+  sameSite: "none",    // ✅ REQUIRED for Netlify ↔ Render
+  path: "/",           // IMPORTANT
+  maxAge: 7 * 24 * 60 * 60 * 1000,
       
     });
 
@@ -84,10 +85,10 @@ export async function login(req, res) {
     });
 
     res.cookie("jwt", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true, // prevent XSS attacks,
-      sameSite: "strict", // prevent CSRF attacks
-      secure: true,
+    httpOnly: true,
+  secure: true,      // REQUIRED (Netlify + Render are HTTPS)
+  sameSite: "none",  // REQUIRED for cross-origin
+  maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
     res.status(200).json({ success: true, user });
